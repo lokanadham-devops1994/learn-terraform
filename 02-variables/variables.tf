@@ -1,0 +1,47 @@
+variable "ami_id" {
+  type    = string
+  default = "ami-0055977a6e828a4f4"
+  description = "The AMI ID for the EC2 instance"
+}
+
+variable "instance_type" {
+  type    = string
+  default = "t3.micro"
+  description = "The instance type for the EC2 instance"
+}
+
+variable "ec2_tags" {
+  type = map
+  default = {
+    Name = "roboshop-mongodb"
+    Environment = "dev"
+    Project = "roboshop"
+    Terraform = "true"
+    Component = "mongodb"
+  }
+  description = "Tags for the EC2 instance"
+}
+
+variable "cidr_blocks" {
+  type    = list
+  default = ["0.0.0.0/0"]
+    description = "CIDR blocks for security group rules"
+}
+
+variable "from_port" {
+  type    = number
+  default = 0
+  description = "The starting port for security group rules"
+}
+
+variable "to_port" {
+  type    = number
+  default = 0
+  description = "The ending port for security group rules"
+}
+
+variable "protocol" {
+  type    = string
+  default = "-1"
+  description = "The protocol for security group rules"
+}
