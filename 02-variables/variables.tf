@@ -6,8 +6,12 @@ variable "ami_id" {
 
 variable "instance_type" {
   type    = string
-  default = "t3.micro"
+  #  default = "t3.micro"
   description = "The instance type for the EC2 instance"
+  validation {
+    condition     = contains(["t3.small", "t3.medium", "t3.micro", "t3.large"], var.instance_type)
+    error_message = "The instance type must be one of: t3.small, t3.medium, t3.micro, t3.large."
+  }
 }
 
 variable "ec2_tags" {
@@ -30,13 +34,13 @@ variable "cidr_blocks" {
 
 variable "from_port" {
   type    = number
-  default = 0
+  # default = 0
   description = "The starting port for security group rules"
 }
 
 variable "to_port" {
   type    = number
-  default = 0
+  # default = 0
   description = "The ending port for security group rules"
 }
 
