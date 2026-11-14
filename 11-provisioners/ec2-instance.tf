@@ -23,13 +23,34 @@ resource "aws_instance" "provisioners" {
     host        = self.public_ip
   }
   
+#   provisioner "remote-exec" {
+#     inline = [ 
+#         "sudo dnf install nginx -y",        # nginx paackage is installed
+#         "sudo systemctl start nginx",       # nginx paackage is started
+#         "sudo systemctl enable nginx",      # nginx paackage is enabled
+#     ]
+#   }
+
+  provisioner "file" {
+    source      = "bootstrap.sh"            # Localfile path
+    destination = "/tmp/bootstrap.sh"       # Remote target path
+  }
+
   provisioner "remote-exec" {
     inline = [ 
-        "sudo dnf install nginx -y",        # nginx paackage is installed
-        "sudo systemctl start nginx",       # nginx paackage is started
-        "sudo systemctl enable nginx",       # nginx paackage is enabled
-    ]
+        "chmod +x /tmp/bootstrap.sh",
+        "sudo sh /tmp/bootstrap.sh"
+     ]
+    
   }
+
+  provisioner "remote-exec" {
+    when = destroy
+    inline = [ 
+        "sudo systemctl stop nginx"         # nginx paackage is stopped
+     ]
+  }
+
 
   tags = var.ec2_tags
  }
