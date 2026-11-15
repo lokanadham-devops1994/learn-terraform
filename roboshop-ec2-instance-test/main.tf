@@ -1,7 +1,8 @@
 module "ec2_instance" {
-    source = "../terraform-aws-instance-common"
-    project = "roboshop"
-    environment = "dev"
-    component =  "mongodb"
-    securitygroup_ids = ["sg-072c30c6865a9da69"]
+  # source            = "../terraform-aws-instance-common"    # from local cocde access to local
+  source = "git::https://github.com/lokanadham-devops1994/learn-terraform.git?ref=main"
+  project           = var.project
+  environment       = var.environment
+  component         = var.component
+  securitygroup_ids = var.security_gruop_ids
 }
