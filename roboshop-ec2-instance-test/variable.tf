@@ -1,5 +1,5 @@
 variable "project" {
-  default="roboshop"
+  default = "roboshop"
 }
 
 variable "environment" {
@@ -10,6 +10,6 @@ variable "component" {
   default = "poc"
 }
 
-variable "security_gruop_ids" {
+variable "security_group_ids" {
   default = ["sg-072c30c6865a9da69"]
 }
