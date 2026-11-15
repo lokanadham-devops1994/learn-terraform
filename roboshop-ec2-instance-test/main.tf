@@ -4,5 +4,5 @@ module "ec2_instance" {
   project           = var.project
   environment       = var.environment
   component         = var.component
-  security_group_ids = var.securitygroup_ids
+  securitygroup_ids = var.securitygroup_ids
 }
